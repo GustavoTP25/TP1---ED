@@ -16,7 +16,7 @@ FilaItens::FilaItens(){
 void FilaItens::adicionarItem(std::string nome){
     CelulaItem* p = new CelulaItem();
     p->item.setNome(nome);
-    p->item.setId(tamanho + 1);
+    p->item.setId(tamanho);
     p->proximo = NULL;
 
     tras->proximo = p;

@@ -1,11 +1,11 @@
 #include "../include/fila_aventureiros.h"
 #include "../include/fila_encomendas.h"
+#include "../include/matriz_modificadores.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
 int main(){
-
     std::ifstream arquivo("entrada.txt");
     if (!arquivo.is_open()) {
         std::cout << "Erro ao abrir o arquivo.";
@@ -16,6 +16,7 @@ int main(){
     FilaItens itens;
     FilaAtributos atributos;
     FilaEncomendas encomendas;
+    MatrizModificadores matrizModificadores;
 
     std::string linha;
     while (std::getline(arquivo, linha)) {
@@ -30,6 +31,14 @@ int main(){
             std::string nome;
             ss >> nome;
             aventureiros.adicionarAventureiro(nome);
+
+        } else if (comando == "E"){ // seleciona o modo da matriz de modificadores
+            char modo;
+            ss >> modo;
+            matrizModificadores.setModo(modo);
+
+        } else if (comando == "IM"){
+            matrizModificadores.imprime();
 
         } else if (comando == "I"){ // adicionar item
             std::string nome;
@@ -56,6 +65,10 @@ int main(){
             ss >> turnos;
             encomendas.forjarItens(aventureiros, itens, turnos);
 
+        } else if (comando == "M"){
+            int idItem, idAtributo, valor;
+            ss >> idItem >> idAtributo >> valor;
+            matrizModificadores.setValor(idItem, idAtributo, valor);
         }
     }
 }

@@ -28,7 +28,7 @@ class FilaItens {
         void listarItens();
         Item pesquisa(int id);
         ~FilaItens();
-
+    friend class MatrizModoL; 
 };
 
 #endif

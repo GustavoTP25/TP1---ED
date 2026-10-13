@@ -16,7 +16,7 @@ FilaAventureiros::FilaAventureiros(){
 void FilaAventureiros::adicionarAventureiro(std::string nome){
     CelulaAventureiro* p = new CelulaAventureiro();
     p->item.setNome(nome);
-    p->item.setId(tamanho + 1);
+    p->item.setId(tamanho);
     p->proximo = NULL;
 
     tras->proximo = p;

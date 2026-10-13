@@ -28,6 +28,7 @@ class FilaAtributos {
         void listarAtributos();
         Atributo pesquisa(int id);
         ~FilaAtributos();
+    friend class MatrizModoL;
 
 };
 

@@ -1,32 +1,40 @@
 #ifndef MATRIZ_MODO_L_H
 #define MATRIZ_MODO_L_H
 
+#include "../include/fila_itens.h"
+#include "../include/fila_atributos.h"
 
 class CelulaMatriz {
     private:
-        int idItem, idAtributo, valor;
-        CelulaMatriz* vizinhoLinha;
-        CelulaMatriz* vizinhoColuna;
+        int lin, col, valor;
+        CelulaMatriz* proxLinha;
+        CelulaMatriz* proxColuna;
 
     public:
-        CelulaMatriz();
-    friend class a;
+        CelulaMatriz(int lin, int col, int valor, CelulaMatriz* proxLinha, CelulaMatriz* proxColuna);
+    friend class MatrizModoL;
+    friend class MatrizModificadores;
 };
 
 class MatrizModoL {
     private:
+        int numeroLinhas, numeroColunas, tamanho;
         // dois ponteiros que apontam para os vetores cabeças
-        // quando um item/atributo é adicionado os vetores são apagados, e novos são criados
-        // com tamanhos diferentes mas com a informação mantida.
-        // cada cabeça é uma lista encadeada
-        CelulaMatriz* vetorCabecasLinha;
-        CelulaMatriz* vetorCabecasColuna;
+        CelulaMatriz** CabecasLinha;
+        CelulaMatriz** CabecasColuna;
         void Limpa();
+        CelulaMatriz* LinhaAnterior(int i, int j) const;
+        CelulaMatriz* ColunaAnterior(int i, int j) const;
+        void ampliaLinhas(int novoNumero);
+        void ampliaColunas(int novoNumero);
 
     public:
         MatrizModoL();
-        void modificarValor(int idItem, int idAtributo, int valor);
+        void imprime() const;
+        int getValor(int i, int j);
+        void setValor(int i, int j, int valor);
         ~MatrizModoL();
+    friend class MatrizModificadores;
 };
 
 #endif

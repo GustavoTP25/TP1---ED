@@ -16,7 +16,7 @@ FilaAtributos::FilaAtributos(){
 void FilaAtributos::adicionarAtributo(std::string nome){
     CelulaAtributo* p = new CelulaAtributo();
     p->item.setNome(nome);
-    p->item.setId(tamanho + 1);
+    p->item.setId(tamanho);
     p->proximo = NULL;
 
     tras->proximo = p;
