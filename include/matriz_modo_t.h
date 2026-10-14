@@ -22,7 +22,10 @@ class MatrizModoT {
         Tripla* vetor; // um ponteiro que aponta para o vetor de triplas
 
     public:
+        void imprime();
         MatrizModoT();
+        void consultaItem(FilaAtributos &atributos, FilaItens &itens, int idItem);
+        void getAtributos(int idItem);
         int getValor(int idItem, int idAtributo);
         Tripla* getTripla(int idItem, int idAtributo);
         void setValor(int idItem, int idAtributo, int valor);

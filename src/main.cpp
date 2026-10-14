@@ -65,10 +65,16 @@ int main(){
             ss >> turnos;
             encomendas.forjarItens(aventureiros, itens, turnos);
 
-        } else if (comando == "M"){
+        } else if (comando == "M"){ // adiciona um modificador a um item
             int idItem, idAtributo, valor;
             ss >> idItem >> idAtributo >> valor;
             matrizModificadores.setValor(idItem, idAtributo, valor);
+            std::cout << "M " << itens.pesquisa(idItem).getNome() << " " << atributos.pesquisa(idAtributo).getNome() << " " << valor << std::endl;
+        
+        } else if (comando == "LI"){
+            int idItem;
+            ss >> idItem;
+            matrizModificadores.consultaItem(atributos, itens, idItem);
         }
     }
 }

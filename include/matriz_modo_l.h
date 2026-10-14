@@ -29,6 +29,7 @@ class MatrizModoL {
         void ampliaColunas(int novoNumero);
 
     public:
+        void consultaItem(FilaAtributos &atributos, FilaItens &itens, int idItem);
         MatrizModoL();
         void imprime() const;
         int getValor(int i, int j);

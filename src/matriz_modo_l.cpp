@@ -111,6 +111,23 @@ void MatrizModoL::setValor(int i, int j, int valor){
 
 }
 
+void MatrizModoL::consultaItem(FilaAtributos &atributos, FilaItens &itens, int idItem){
+    CelulaMatriz* p = CabecasLinha[idItem]->proxLinha;
+    Item item = itens.pesquisa(idItem);
+    std::cout << "LI " << item.getNome();
+    bool aux = 0;
+    for (int i = 0; i < numeroLinhas; i++){
+        if (p != NULL){
+            aux = 1;
+            std::cout << " " << atributos.pesquisa(p->col).getNome() << " " << p->valor;
+            p = p->proxLinha;
+        }
+    }
+    if (aux == 0)
+        std::cout << " VAZIO";
+    std::cout << std::endl;
+}
+
 void MatrizModoL::imprime() const {
     for (int i = 0; i < numeroLinhas; i++) {
         CelulaMatriz* p = CabecasLinha[i]->proxLinha;   // pula a cabeça
@@ -139,7 +156,7 @@ MatrizModoL::~MatrizModoL(){
     // apaga os cabecas
     for (int j = 0; j < numeroColunas; j++) {
         delete CabecasColuna[j];
-        delete[] CabecasLinha; 
-        delete[] CabecasColuna;
     }
+    delete[] CabecasLinha; 
+    delete[] CabecasColuna;
 }

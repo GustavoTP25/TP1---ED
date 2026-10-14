@@ -11,11 +11,13 @@ void MatrizModificadores::transicionaTparaL(){
     MatrizModoT* matrizT = this->matrizModoT;
     MatrizModoL* matrizL = new MatrizModoL();
 
-    for (int i = 0; i < matrizModoT->tamanho; i++){
+    for (int i = 0; i < matrizT->tamanho; i++){
         Tripla tripla = matrizT->vetor[i];
         matrizL->setValor(tripla.idItem, tripla.idAtributo, tripla.valor);
     }
-    delete[] matrizT;
+    delete matrizT;                
+    this->matrizModoT = NULL;       
+    this->matrizModoL = matrizL;
 }
 
 void MatrizModificadores::transicionaLparaT(){
@@ -36,14 +38,21 @@ void MatrizModificadores::transicionaLparaT(){
 
 void MatrizModificadores::setModo(char modo){
     std::cout << "E " << modo << std::endl;
-    if (modo == 'L' && this->modo == 'L')return;
-    else if (modo == 'T' && this->modo == 'T') return;
+    if (modo == this->modo) return;
     
     if (modo == 'L'){
         transicionaTparaL();
     } else if (modo == 'T'){
         transicionaLparaT();
     }
+    this->modo = modo;
+}
+
+void MatrizModificadores::consultaItem(FilaAtributos &atributos, FilaItens &itens, int idItem){
+    if (this->modo == 'L')
+        this->matrizModoL->consultaItem(atributos, itens, idItem);
+    else
+        this->matrizModoT->consultaItem(atributos, itens, idItem);
 }
 
 void MatrizModificadores::setValor(int idItem, int idAtributo, int valor){
@@ -65,7 +74,10 @@ int MatrizModificadores::getValor(int idItem, int idAtributo){
 void MatrizModificadores::imprime() const{
     if (this->modo == 'L')
         matrizModoL->imprime();
+    if (this->modo == 'T')
+        matrizModoT->imprime();
 }
+
 
 MatrizModificadores::~MatrizModificadores(){
     if (this->modo == 'L')

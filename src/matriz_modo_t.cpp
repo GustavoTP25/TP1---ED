@@ -1,4 +1,5 @@
 #include "../include/matriz_modo_t.h"
+#include <iostream>
 
 Tripla::Tripla(){
     this->idItem = -1;
@@ -44,32 +45,51 @@ void MatrizModoT::setValor(int idItem, int idAtributo, int valor){
             delete[] vetor;
             vetor = novoVetor;
             tamanho--;
+            return;
         }
     } else {
         // o terceiro caso é se a tripla nao existe e o valor passado é zero, assim nada muda
         if (valor == 0)
             return;
+
         // o ultimo caso é se a tripla nao existe e o valor é diferente de zero
         // assim, é preciso criar uma nova tripla
-        else {
+        //obs: adicionar a inserção já ordenada dps
+        Tripla* novoVetor = new Tripla[tamanho + 1];
 
-            //obs: adicionar a inserção já ordenada dps
-            Tripla* novoVetor = new Tripla[tamanho + 1];
+        int j = 0;
+        for (int i = 0; i < tamanho; i++){
+            novoVetor[j] = vetor[i];
+            j++;
+        }
+        novoVetor[j].idItem = idItem;
+        novoVetor[j].idAtributo = idAtributo;
+        novoVetor[j].valor = valor;
+        delete[] vetor;
+        vetor = novoVetor;
+        tamanho++;
+    }
+}
 
-            int j = 0;
-            for (int i = 0; i < tamanho; i++){
-                novoVetor[j] = vetor[i];
-                j++;
-            }
-            novoVetor[j].idItem = idItem;
-            novoVetor[j].idAtributo = idAtributo;
-            novoVetor[j].valor = valor;
-
-            delete[] vetor;
-            vetor = novoVetor;
-            tamanho++;
+void MatrizModoT::consultaItem(FilaAtributos &atributos, FilaItens &itens, int idItem){
+    std::cout << "LI " << itens.pesquisa(idItem).getNome();
+    bool aux = 0;
+    for (int i = 0; i < this->tamanho; i++){
+        if (this->vetor[i].idItem == idItem){
+            aux = 1;
+            std::cout << " " << atributos.pesquisa(vetor[i].idAtributo).getNome() << " " << vetor[i].valor;
         }
     }
+    if (aux == 0)
+        std::cout << " VAZIO";
+    std::cout << std::endl;
+}
+
+void MatrizModoT::imprime(){
+    for(int i = 0; i < this->tamanho; i++){
+        std::cout << "(" << this->vetor[i].idItem << ", "<< this->vetor[i].idAtributo << ", " << this->vetor[i].valor << ") ";
+    }
+    std::cout << std::endl;
 }
 
 

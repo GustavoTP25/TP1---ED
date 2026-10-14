@@ -14,6 +14,7 @@ class MatrizModificadores {
 
     public:
         MatrizModificadores();
+        void consultaItem(FilaAtributos &atributos, FilaItens &itens, int idItem);
         void imprime() const;
         void setModo(char modo);
         void setValor(int idItem, int idAtributo, int valor);
