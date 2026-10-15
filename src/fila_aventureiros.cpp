@@ -45,11 +45,11 @@ void FilaAventureiros::listarAventureiros(){
     }
 }
 
-bool FilaAventureiros::equiparItem(FilaItens &itens, int idAventureiro, int idItem){
+bool FilaAventureiros::equiparItem(FilaItens &itens, int idAventureiro, int idItem, MatrizModificadores &matrizModificadores){
     Item item = itens.pesquisa(idItem);
     Aventureiro* aventureiro = this->pesquisa(idAventureiro);
     if (item.getId() != -1 && aventureiro != NULL){
-        aventureiro->build.equiparItem(item);
+        aventureiro->build.equiparItem(item, matrizModificadores, idAventureiro, aventureiro->build);
         return 1;
     }
     return 0;

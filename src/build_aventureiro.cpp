@@ -17,12 +17,14 @@ BuildAventureiro::BuildAventureiro(){
     this->tamanho = 0;
 }
 
-void BuildAventureiro::equiparItem(Item item){
+void BuildAventureiro::equiparItem(Item item, MatrizModificadores &matrizModificadores, int idAventureiro, BuildAventureiro &build){
     CelulaBuild *p = new CelulaBuild();
     p->item = item;
     p->proximo = topo;
     topo = p;
     tamanho++;
+
+    matrizModificadores.filaSinergia.setValor(item.getId(), idAventureiro, matrizModificadores.calculaSinergia(build, item.getId()));
 }
 
 Item BuildAventureiro::desequiparItem(){

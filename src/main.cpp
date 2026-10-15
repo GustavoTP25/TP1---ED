@@ -43,7 +43,7 @@ int main(){
         } else if (comando == "I"){ // adicionar item
             std::string nome;
             ss>> nome;
-            itens.adicionarItem(nome);
+            itens.adicionarItem(nome, matrizModificadores);
 
         } else if (comando == "A"){ //adicionar atributo
             std::string nome;
@@ -63,12 +63,12 @@ int main(){
         } else if (comando == "Z"){ // forja n itens
             int turnos;
             ss >> turnos;
-            encomendas.forjarItens(aventureiros, itens, turnos);
+            encomendas.forjarItens(aventureiros, itens, turnos, matrizModificadores);
 
         } else if (comando == "M"){ // adiciona um modificador a um item
             int idItem, idAtributo, valor;
             ss >> idItem >> idAtributo >> valor;
-            matrizModificadores.setValor(idItem, idAtributo, valor);
+            matrizModificadores.setValor(idItem, idAtributo, valor, atributos);
             std::cout << "M " << itens.pesquisa(idItem).getNome() << " " << atributos.pesquisa(idAtributo).getNome() << " " << valor << std::endl;
         
         } else if (comando == "LI"){ // listagem dos atributos associados a um item

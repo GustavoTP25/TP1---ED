@@ -4,6 +4,8 @@
 #include <string>
 #include "item.h"
 
+class MatrizModificadores; // em matrizmodificadores eu tbm incluo a build, virando um ciclo. P evitar isso, declarei uma classe com msm nome
+
 class CelulaItem {
     private:
         Item item;
@@ -24,11 +26,11 @@ class FilaItens {
 
     public:
         FilaItens();
-        void adicionarItem(std::string nome);
+        void adicionarItem(std::string nome, MatrizModificadores &matrizModificadores);
         void listarItens();
         Item pesquisa(int id);
         ~FilaItens();
-    friend class MatrizModoL; 
+    friend class MatrizModoL;
 };
 
 #endif

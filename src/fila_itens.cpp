@@ -1,5 +1,6 @@
 #include "../include/fila_itens.h"
 #include <iostream>
+#include "matriz_modificadores.h"
 
 CelulaItem::CelulaItem(){
     proximo = NULL;
@@ -13,7 +14,7 @@ FilaItens::FilaItens(){
     tamanho = 0;
 }
 
-void FilaItens::adicionarItem(std::string nome){
+void FilaItens::adicionarItem(std::string nome, MatrizModificadores &matrizMestricas){
     CelulaItem* p = new CelulaItem();
     p->item.setNome(nome);
     p->item.setId(tamanho);

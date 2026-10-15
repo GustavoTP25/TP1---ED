@@ -24,13 +24,13 @@ void FilaEncomendas::adicionarEncomenda(int idAventureiro, int idItem){
     std::cout << "F " << tamanho << std::endl;
 }
 
-void FilaEncomendas::forjarItens(FilaAventureiros &aventureiros, FilaItens &itens, int k){
+void FilaEncomendas::forjarItens(FilaAventureiros &aventureiros, FilaItens &itens, int k, MatrizModificadores &matrizModificadores){
     CelulaEncomenda *p = frente->proximo;
     std::string encomendas = ""; 
 
     int i = 0;
     while (p != NULL && i < k) {
-        aventureiros.equiparItem(itens, p->item.getIdAventureiro(), p->item.getIdItem());
+        aventureiros.equiparItem(itens, p->item.getIdAventureiro(), p->item.getIdItem(), matrizModificadores);
         encomendas += "encomenda_" + std::to_string(i + 1) + " " + std::to_string(p->item.getIdAventureiro()) 
             + " " + std::to_string(p->item.getIdItem()) + " "; // conferir se o espaço no final nao dará problema no vpl
 

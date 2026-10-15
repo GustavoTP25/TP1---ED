@@ -31,6 +31,7 @@ class FilaAtributos {
         ~FilaAtributos();
     friend class MatrizModoL;
     friend class BuildAventureiro;
+    friend class MatrizModificadores;
 
 };
 

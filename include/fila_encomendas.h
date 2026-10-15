@@ -28,7 +28,7 @@ class FilaEncomendas {
         FilaEncomendas();
         void adicionarEncomenda(int idAventureiro, int idItem);
         // é preciso passar o endereço de aventureiros e itens, pois se passar por cópia, quando a função terminar ela irá apagar a lista original devido ao destrutor
-        void forjarItens(FilaAventureiros &aventureiros, FilaItens &itens, int k);
+        void forjarItens(FilaAventureiros &aventureiros, FilaItens &itens, int k, MatrizModificadores &matrizModificadores);
         ~FilaEncomendas();
 
 };

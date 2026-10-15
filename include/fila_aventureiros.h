@@ -28,7 +28,7 @@ class FilaAventureiros {
         void listarAventureiros();
         Aventureiro* pesquisa(int id);
 
-        bool equiparItem(FilaItens &itens, int idAventureiro, int idItem);
+        bool equiparItem(FilaItens &itens, int idAventureiro, int idItem, MatrizModificadores &matrizModificadores);
         void desequiparItem(FilaItens &itens, int idAventureiro);
 
         ~FilaAventureiros();
