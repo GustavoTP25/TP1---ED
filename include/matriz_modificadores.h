@@ -3,6 +3,7 @@
 
 #include "matriz_modo_l.h"
 #include "matriz_modo_t.h"
+#include "build_aventureiro.h"
 
 class MatrizModificadores {
     private:
@@ -15,6 +16,8 @@ class MatrizModificadores {
     public:
         MatrizModificadores();
         void consultaItem(FilaAtributos &atributos, FilaItens &itens, int idItem);
+        void consultaAtributo(FilaAtributos &atributos, FilaItens &itens, int idAtributo);
+        int somaAtributos(BuildAventureiro &build, int idAtributo);
         void imprime() const;
         void setModo(char modo);
         void setValor(int idItem, int idAtributo, int valor);

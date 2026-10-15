@@ -116,11 +116,28 @@ void MatrizModoL::consultaItem(FilaAtributos &atributos, FilaItens &itens, int i
     Item item = itens.pesquisa(idItem);
     std::cout << "LI " << item.getNome();
     bool aux = 0;
+    for (int i = 0; i < numeroColunas; i++){
+        if (p != NULL){
+            aux = 1;
+            std::cout << " atributo_" << i + 1 << " " << atributos.pesquisa(p->col).getId() << " " << p->valor;
+            p = p->proxLinha;
+        }
+    }
+    if (aux == 0)
+        std::cout << " VAZIO";
+    std::cout << std::endl;
+}
+
+void MatrizModoL::consultaAtributo(FilaAtributos &atributos, FilaItens &itens, int idAtributo){
+    CelulaMatriz* p = CabecasColuna[idAtributo]->proxColuna;
+    Atributo atributo = atributos.pesquisa(idAtributo);
+    std::cout << "LA " << atributo.getNome();
+    bool aux = 0;
     for (int i = 0; i < numeroLinhas; i++){
         if (p != NULL){
             aux = 1;
-            std::cout << " " << atributos.pesquisa(p->col).getNome() << " " << p->valor;
-            p = p->proxLinha;
+            std::cout << " item_" << i + 1 << " " << itens.pesquisa(p->lin).getId() << " " << p->valor;
+            p = p->proxColuna;
         }
     }
     if (aux == 0)

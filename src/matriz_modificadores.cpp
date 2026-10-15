@@ -55,6 +55,33 @@ void MatrizModificadores::consultaItem(FilaAtributos &atributos, FilaItens &iten
         this->matrizModoT->consultaItem(atributos, itens, idItem);
 }
 
+void MatrizModificadores::consultaAtributo(FilaAtributos &atributos, FilaItens &itens, int idAtributo){
+    if (this->modo == 'L')
+        this->matrizModoL->consultaAtributo(atributos, itens, idAtributo);
+    else
+        this->matrizModoT->consultaAtributo(atributos, itens, idAtributo);
+}
+
+int MatrizModificadores::somaAtributos(BuildAventureiro &build, int idAtributo){
+    int soma = 0;
+    if (this->modo == 'L'){
+        if (idAtributo >= 0 && idAtributo < matrizModoL->numeroColunas){
+            CelulaMatriz* p = matrizModoL->CabecasColuna[idAtributo]->proxColuna;
+            while (p != NULL){
+                if (build.verificaItemEquipado(p->lin))
+                    soma += p->valor;
+                p = p->proxColuna;
+            }
+        }
+    } else {
+        for (int i = 0; i < this->matrizModoT->tamanho; i++){
+            if (build.verificaItemEquipado(this->matrizModoT->vetor[i].idItem) && matrizModoT->vetor[i].idAtributo == idAtributo)
+                soma += this->matrizModoT->vetor[i].valor;
+        }
+    }
+    return soma;
+}
+
 void MatrizModificadores::setValor(int idItem, int idAtributo, int valor){
     if (this->modo == 'L')
         this->matrizModoL->setValor(idItem, idAtributo, valor);

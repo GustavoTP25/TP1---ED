@@ -18,6 +18,10 @@ void Aventureiro::setId(int id){
     this->id = id;
 }
 
+void Aventureiro::listarBuild(MatrizModificadores &matrizModificadores, FilaAtributos &atributos){
+    this->build.listarBuild(this->nome, this->build, matrizModificadores, atributos);
+}
+
 void Aventureiro::setNome(std::string nome){
     this->nome = nome;
 }

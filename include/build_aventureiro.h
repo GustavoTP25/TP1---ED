@@ -3,6 +3,9 @@
 
 #include <string>
 #include "item.h"
+#include "fila_atributos.h"
+
+class MatrizModificadores; // em matrizmodificadores eu tbm incluo a build, virando um ciclo. P evitar isso, declarei uma classe com msm nome
 
 class CelulaBuild {
     private:
@@ -23,6 +26,8 @@ class BuildAventureiro {
     public:
         BuildAventureiro();
         void equiparItem(Item item);
+        bool verificaItemEquipado(int idItem);
+        void listarBuild(std::string nomeAventureiro, BuildAventureiro &build, MatrizModificadores &matrizModificadores, FilaAtributos &atributos);
         Item desequiparItem();
         void Limpa();
         ~BuildAventureiro();

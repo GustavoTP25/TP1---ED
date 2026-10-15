@@ -16,6 +16,7 @@ class Aventureiro {
         Aventureiro();
         int getId();
         std::string getNome();
+        void listarBuild(MatrizModificadores &matrizModificadores, FilaAtributos &atributos);
         void setId(int id);
         void setNome(std::string nome);
     friend class FilaAventureiros;

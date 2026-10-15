@@ -1,4 +1,8 @@
 #include "../include/build_aventureiro.h"
+#include <iostream>
+#include "../include/build_aventureiro.h"
+#include "../include/matriz_modificadores.h"
+#include "../include/fila_atributos.h"
 
 CelulaBuild::CelulaBuild(){
     this->item.setId(-1);
@@ -38,6 +42,37 @@ Item BuildAventureiro::desequiparItem(){
     tamanho--;
         
     return aux;
+}
+
+bool BuildAventureiro::verificaItemEquipado(int idItem){
+    CelulaBuild* p = this->topo;
+    while (p != NULL){
+        if (p->item.getId() == idItem)
+            return 1;
+        p = p->proximo;
+    }
+    return 0;
+}
+
+void BuildAventureiro::listarBuild(std::string nomeAventureiro, BuildAventureiro &build, MatrizModificadores &matrizModificadores, FilaAtributos &atributos){
+    CelulaAtributo* p = atributos.frente;
+    std::cout << "LH " << nomeAventureiro;
+    int i = 1;
+    int soma;
+    bool aux = 0;
+    while (p != NULL){
+        soma = matrizModificadores.somaAtributos(build, p->item.getId());
+        if (soma != 0){
+            std::cout << " atributo_" << i << " " <<  p->item.getId() << " " << soma;
+            aux = 1;
+            i++;
+        }
+        p = p->proximo;
+    }
+    if (aux == 0)
+        std::cout << " VAZIO";
+    std::cout << std::endl;
+    
 }
 
 void BuildAventureiro::Limpa(){

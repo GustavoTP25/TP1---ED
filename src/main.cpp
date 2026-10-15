@@ -71,10 +71,20 @@ int main(){
             matrizModificadores.setValor(idItem, idAtributo, valor);
             std::cout << "M " << itens.pesquisa(idItem).getNome() << " " << atributos.pesquisa(idAtributo).getNome() << " " << valor << std::endl;
         
-        } else if (comando == "LI"){
+        } else if (comando == "LI"){ // listagem dos atributos associados a um item
             int idItem;
             ss >> idItem;
             matrizModificadores.consultaItem(atributos, itens, idItem);
+
+        } else if (comando == "LA"){ // listagem dos itens associados a um atributo
+            int idAtributo;
+            ss >> idAtributo;
+            matrizModificadores.consultaAtributo(atributos, itens, idAtributo);
+
+        } else if (comando == "LH"){
+            int idAventureiro;
+            ss >> idAventureiro;
+            aventureiros.pesquisa(idAventureiro)->listarBuild(matrizModificadores, atributos);
         }
     }
 }

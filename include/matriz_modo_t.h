@@ -25,6 +25,7 @@ class MatrizModoT {
         void imprime();
         MatrizModoT();
         void consultaItem(FilaAtributos &atributos, FilaItens &itens, int idItem);
+        void consultaAtributo(FilaAtributos &atributos, FilaItens &itens, int idAtributo);
         void getAtributos(int idItem);
         int getValor(int idItem, int idAtributo);
         Tripla* getTripla(int idItem, int idAtributo);

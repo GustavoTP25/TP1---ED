@@ -57,14 +57,23 @@ void MatrizModoT::setValor(int idItem, int idAtributo, int valor){
         //obs: adicionar a inserção já ordenada dps
         Tripla* novoVetor = new Tripla[tamanho + 1];
 
+        int pos = 0; // inserção ordenada
+        while (pos < tamanho && (vetor[pos].idItem < idItem || (vetor[pos].idItem == idItem && vetor[pos].idAtributo < idAtributo)))
+            pos++;
+
         int j = 0;
         for (int i = 0; i < tamanho; i++){
-            novoVetor[j] = vetor[i];
-            j++;
+            novoVetor[i] = vetor[i];
         }
-        novoVetor[j].idItem = idItem;
-        novoVetor[j].idAtributo = idAtributo;
-        novoVetor[j].valor = valor;
+        novoVetor[pos].idItem = idItem;
+        novoVetor[pos].idAtributo = idAtributo;
+        novoVetor[pos].valor = valor;
+
+        for (int i = pos; i < tamanho; i++){
+            novoVetor[i + 1] = vetor[i];
+        }
+
+
         delete[] vetor;
         vetor = novoVetor;
         tamanho++;
@@ -77,7 +86,21 @@ void MatrizModoT::consultaItem(FilaAtributos &atributos, FilaItens &itens, int i
     for (int i = 0; i < this->tamanho; i++){
         if (this->vetor[i].idItem == idItem){
             aux = 1;
-            std::cout << " " << atributos.pesquisa(vetor[i].idAtributo).getNome() << " " << vetor[i].valor;
+            std::cout << " atributo_" << i + 1 << " " << atributos.pesquisa(vetor[i].idAtributo).getId() << " " << this->vetor[i].valor;
+        }
+    }
+    if (aux == 0)
+        std::cout << " VAZIO";
+    std::cout << std::endl;
+}
+
+void MatrizModoT::consultaAtributo(FilaAtributos &atributos, FilaItens &itens, int idAtributo){
+    std::cout << "LA " << atributos.pesquisa(idAtributo).getNome();
+    bool aux = 0;
+    for (int i = 0; i < this->tamanho; i++){
+        if (this->vetor[i].idAtributo == idAtributo){
+            aux = 1;
+            std::cout << " item_" << i + 1 << " " << itens.pesquisa(vetor[i].idItem).getId() << " " << this->vetor[i].valor;
         }
     }
     if (aux == 0)

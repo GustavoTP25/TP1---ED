@@ -12,6 +12,7 @@ class CelulaAtributo {
     public:
         CelulaAtributo();
     friend class FilaAtributos;
+    friend class BuildAventureiro;
 };
 
 // Uma fila encadeada para armzenar os aventureiros
@@ -29,6 +30,7 @@ class FilaAtributos {
         Atributo pesquisa(int id);
         ~FilaAtributos();
     friend class MatrizModoL;
+    friend class BuildAventureiro;
 
 };
 
