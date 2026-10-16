@@ -1,4 +1,4 @@
-#include "../include/matriz_modo_t.h"
+#include "matriz_modo_t.h"
 #include <iostream>
 
 Tripla::Tripla(){
@@ -83,10 +83,12 @@ void MatrizModoT::setValor(int idItem, int idAtributo, int valor){
 void MatrizModoT::consultaItem(FilaAtributos &atributos, FilaItens &itens, int idItem){
     std::cout << "LI " << itens.pesquisa(idItem).getNome();
     bool aux = 0;
+    int quantidade = 1;
     for (int i = 0; i < this->tamanho; i++){
         if (this->vetor[i].idItem == idItem){
             aux = 1;
-            std::cout << " atributo_" << i + 1 << " " << atributos.pesquisa(vetor[i].idAtributo).getId() << " " << this->vetor[i].valor;
+            std::cout << " atributo_" << quantidade << " " << atributos.pesquisa(vetor[i].idAtributo).getId() << " " << this->vetor[i].valor;
+            quantidade++;
         }
     }
     if (aux == 0)
@@ -97,10 +99,12 @@ void MatrizModoT::consultaItem(FilaAtributos &atributos, FilaItens &itens, int i
 void MatrizModoT::consultaAtributo(FilaAtributos &atributos, FilaItens &itens, int idAtributo){
     std::cout << "LA " << atributos.pesquisa(idAtributo).getNome();
     bool aux = 0;
+    int quantidade = 1;
     for (int i = 0; i < this->tamanho; i++){
         if (this->vetor[i].idAtributo == idAtributo){
             aux = 1;
-            std::cout << " item_" << i + 1 << " " << itens.pesquisa(vetor[i].idItem).getId() << " " << this->vetor[i].valor;
+            std::cout << " item_" << quantidade << " " << itens.pesquisa(vetor[i].idItem).getId() << " " << this->vetor[i].valor;
+            quantidade++;
         }
     }
     if (aux == 0)

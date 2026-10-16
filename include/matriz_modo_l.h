@@ -1,8 +1,8 @@
 #ifndef MATRIZ_MODO_L_H
 #define MATRIZ_MODO_L_H
 
-#include "../include/fila_itens.h"
-#include "../include/fila_atributos.h"
+#include "fila_itens.h"
+#include "fila_atributos.h"
 
 class CelulaMatriz {
     private:

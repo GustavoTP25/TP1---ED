@@ -1,4 +1,4 @@
-#include "../include/atributo.h"
+#include "atributo.h"
 
 Atributo::Atributo(){
     this->id = -1;

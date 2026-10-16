@@ -1,5 +1,5 @@
-#include "../include/aventureiro.h"
-#include "../include/fila_itens.h"
+#include "aventureiro.h"
+#include "fila_itens.h"
 
 Aventureiro::Aventureiro(){
     this->id = -1;

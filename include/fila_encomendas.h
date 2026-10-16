@@ -3,8 +3,8 @@
 
 #include <string>
 #include "encomenda.h"
-#include "../include/fila_aventureiros.h"
-#include "../include/fila_itens.h"
+#include "fila_aventureiros.h"
+#include "fila_itens.h"
 
 class CelulaEncomenda {
     private:

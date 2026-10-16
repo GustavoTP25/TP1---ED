@@ -1,4 +1,4 @@
-#include "../include/fila_aventureiros.h"
+#include "fila_aventureiros.h"
 #include <iostream>
 
 CelulaAventureiro::CelulaAventureiro(){

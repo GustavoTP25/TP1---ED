@@ -1,4 +1,4 @@
-#include "../include/matriz_modo_l.h"
+#include "matriz_modo_l.h"
 #include <iostream>
 
 CelulaMatriz::CelulaMatriz(int lin, int col, int valor, CelulaMatriz* proxLinha, CelulaMatriz* proxColuna){
@@ -112,15 +112,18 @@ void MatrizModoL::setValor(int i, int j, int valor){
 }
 
 void MatrizModoL::consultaItem(FilaAtributos &atributos, FilaItens &itens, int idItem){
-    CelulaMatriz* p = CabecasLinha[idItem]->proxLinha;
     Item item = itens.pesquisa(idItem);
     std::cout << "LI " << item.getNome();
     bool aux = 0;
-    for (int i = 0; i < numeroColunas; i++){
-        if (p != NULL){
+
+    if (idItem >= 0 && idItem < numeroLinhas){ // se existir um item que nao possui modificador, ele pode nao estar na matriz
+        int i = 1;
+        CelulaMatriz* p = CabecasLinha[idItem]->proxLinha;
+        while (p != NULL){
             aux = 1;
-            std::cout << " atributo_" << i + 1 << " " << atributos.pesquisa(p->col).getId() << " " << p->valor;
+            std::cout << " atributo_" << i << " " << atributos.pesquisa(p->col).getId() << " " << p->valor;
             p = p->proxLinha;
+            i++;
         }
     }
     if (aux == 0)
@@ -129,15 +132,18 @@ void MatrizModoL::consultaItem(FilaAtributos &atributos, FilaItens &itens, int i
 }
 
 void MatrizModoL::consultaAtributo(FilaAtributos &atributos, FilaItens &itens, int idAtributo){
-    CelulaMatriz* p = CabecasColuna[idAtributo]->proxColuna;
     Atributo atributo = atributos.pesquisa(idAtributo);
     std::cout << "LA " << atributo.getNome();
     bool aux = 0;
-    for (int i = 0; i < numeroLinhas; i++){
-        if (p != NULL){
+
+    if (idAtributo >= 0 && idAtributo < numeroColunas){
+        int i = 1;
+        CelulaMatriz* p = CabecasColuna[idAtributo]->proxColuna;
+        while (p != NULL){
             aux = 1;
-            std::cout << " item_" << i + 1 << " " << itens.pesquisa(p->lin).getId() << " " << p->valor;
+            std::cout << " item_" << i << " " << itens.pesquisa(p->lin).getId() << " " << p->valor;
             p = p->proxColuna;
+            i++;
         }
     }
     if (aux == 0)

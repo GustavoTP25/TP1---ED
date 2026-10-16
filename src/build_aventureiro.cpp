@@ -1,8 +1,8 @@
-#include "../include/build_aventureiro.h"
+#include "build_aventureiro.h"
 #include <iostream>
-#include "../include/build_aventureiro.h"
-#include "../include/matriz_modificadores.h"
-#include "../include/fila_atributos.h"
+#include "build_aventureiro.h"
+#include "matriz_modificadores.h"
+#include "fila_atributos.h"
 
 CelulaBuild::CelulaBuild(){
     this->item.setId(-1);

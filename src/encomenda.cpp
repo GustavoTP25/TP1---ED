@@ -1,4 +1,4 @@
-#include "../include/encomenda.h"
+#include "encomenda.h"
 
 Encomenda::Encomenda(){
     this->idAventureiro = -1;

@@ -1,8 +1,8 @@
 #ifndef MATRIZ_MODO_T_H
 #define MATRIZ_MODO_T_H
 
-#include "../include/fila_itens.h"
-#include "../include/fila_atributos.h"
+#include "fila_itens.h"
+#include "fila_atributos.h"
 
 class Tripla {
     private:
@@ -19,7 +19,7 @@ class Tripla {
 class MatrizModoT {
     private:
         int tamanho;
-        Tripla* vetor; // um ponteiro que aponta para o vetor de triplas
+        Tripla* vetor; // um ponteiro que aponta para o vetor dE Lriplas
 
     public:
         void imprime();

@@ -1,4 +1,4 @@
-#include "../include/fila_atributos.h"
+#include "fila_atributos.h"
 #include <iostream>
 
 CelulaAtributo::CelulaAtributo(){

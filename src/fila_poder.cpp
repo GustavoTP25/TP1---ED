@@ -1,4 +1,4 @@
-#include "../include/fila_poder.h"
+#include "fila_poder.h"
 #include <iostream>
 #include <cmath>
 

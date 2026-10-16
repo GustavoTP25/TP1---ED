@@ -1,4 +1,4 @@
-#include "../include/fila_sinergia.h"
+#include "fila_sinergia.h"
 #include <iostream>
 #include <cmath>
 

@@ -1,4 +1,4 @@
-#include "../include/fila_encomendas.h"
+#include "fila_encomendas.h"
 #include <iostream>
 
 CelulaEncomenda::CelulaEncomenda(){
@@ -37,13 +37,17 @@ void FilaEncomendas::forjarItens(FilaAventureiros &aventureiros, FilaItens &iten
         frente->proximo = p->proximo;
         delete p;
         p = frente->proximo;
+        tamanho--;
         i++;
     }
     std::cout << "Z " << i << std::endl;
     
     if (i != 0)
         std::cout << encomendas << std::endl;
-    tras = frente;
+    
+    if (frente->proximo == NULL)
+        tras = frente;
+
 }
 
 void FilaEncomendas::Limpa(){

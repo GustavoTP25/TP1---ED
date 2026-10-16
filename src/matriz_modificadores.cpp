@@ -1,4 +1,4 @@
-#include "../include/matriz_modificadores.h"
+#include "matriz_modificadores.h"
 #include <iostream>
 #include <cmath>
 #include <iomanip>
@@ -87,11 +87,13 @@ int MatrizModificadores::somaAtributos(BuildAventureiro &build, int idAtributo){
 double MatrizModificadores::calculaPoderItem(int idItem){
     double poder = 0;
     if (this->modo == 'L'){
-        CelulaMatriz* p = matrizModoL->CabecasLinha[idItem]->proxLinha;
+        if (idItem >= 0 && idItem < matrizModoL->numeroLinhas){
+            CelulaMatriz* p = matrizModoL->CabecasLinha[idItem]->proxLinha;
             while (p != NULL){
                 poder += p->valor;
                 p = p->proxLinha;
             }
+        }
     } else {
         for (int i = 0; i < this->matrizModoT->tamanho; i++){
             if (this->matrizModoT->vetor[i].idItem == idItem)

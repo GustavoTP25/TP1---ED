@@ -1,6 +1,6 @@
-#include "../include/fila_aventureiros.h"
-#include "../include/fila_encomendas.h"
-#include "../include/matriz_modificadores.h"
+#include "fila_aventureiros.h"
+#include "fila_encomendas.h"
+#include "matriz_modificadores.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -36,9 +36,6 @@ int main(){
             char modo;
             ss >> modo;
             matrizModificadores.setModo(modo);
-
-        } else if (comando == "IM"){
-            matrizModificadores.imprime();
 
         } else if (comando == "I"){ // adicionar item
             std::string nome;

@@ -1,4 +1,4 @@
-#include "../include/item.h"
+#include "item.h"
 
 Item::Item(){
     this->id = -1;

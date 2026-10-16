@@ -1,4 +1,4 @@
-#include "../include/fila_equilibrio.h"
+#include "fila_equilibrio.h"
 #include <iostream>
 #include <cmath>
 
