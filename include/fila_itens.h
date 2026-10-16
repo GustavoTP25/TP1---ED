@@ -31,6 +31,7 @@ class FilaItens {
         Item pesquisa(int id);
         ~FilaItens();
     friend class MatrizModoL;
+    friend class MatrizModificadores;
 };
 
 #endif

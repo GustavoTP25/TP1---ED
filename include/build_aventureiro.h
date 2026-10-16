@@ -25,8 +25,9 @@ class BuildAventureiro {
 
     public:
         BuildAventureiro();
-        void equiparItem(Item item, MatrizModificadores &matrizModificadores, int idAventureiro, BuildAventureiro &build);
+        void equiparItem(Item item);
         bool verificaItemEquipado(int idItem);
+        int contarItens(int idItem);
         void listarBuild(std::string nomeAventureiro, BuildAventureiro &build, MatrizModificadores &matrizModificadores, FilaAtributos &atributos);
         Item desequiparItem();
         void Limpa();

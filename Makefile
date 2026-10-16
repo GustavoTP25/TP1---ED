@@ -2,9 +2,21 @@ CC = g++
 
 all: bin/tp
 
-bin/tp: obj/matriz_modificadores.o obj/matriz_modo_l.o obj/matriz_modo_t.o obj/fila_aventureiros.o obj/fila_itens.o obj/fila_atributos.o obj/fila_encomendas.o obj/aventureiro.o obj/build_aventureiro.o obj/item.o obj/atributo.o obj/encomenda.o obj/main.o
+bin/tp: obj/fila_equilibrio.o obj/fila_poder.o obj/fila_sinergia.o obj/matriz_modificadores.o obj/matriz_modo_l.o obj/matriz_modo_t.o obj/fila_aventureiros.o obj/fila_itens.o obj/fila_atributos.o obj/fila_encomendas.o obj/aventureiro.o obj/build_aventureiro.o obj/item.o obj/atributo.o obj/encomenda.o obj/main.o
 	@mkdir -p bin
-	$(CC) obj/matriz_modificadores.o obj/matriz_modo_l.o obj/matriz_modo_t.o obj/fila_aventureiros.o obj/fila_itens.o obj/fila_atributos.o obj/aventureiro.o obj/fila_encomendas.o obj/build_aventureiro.o obj/item.o obj/atributo.o obj/encomenda.o obj/main.o -o bin/tp
+	$(CC) obj/fila_equilibrio.o obj/fila_poder.o obj/fila_sinergia.o obj/matriz_modificadores.o obj/matriz_modo_l.o obj/matriz_modo_t.o obj/fila_aventureiros.o obj/fila_itens.o obj/fila_atributos.o obj/aventureiro.o obj/fila_encomendas.o obj/build_aventureiro.o obj/item.o obj/atributo.o obj/encomenda.o obj/main.o -o bin/tp
+
+obj/fila_equilibrio.o:
+	@mkdir -p obj
+	$(CC) -Iinclude -c src/fila_equilibrio.cpp -o obj/fila_equilibrio.o
+
+obj/fila_poder.o:
+	@mkdir -p obj
+	$(CC) -Iinclude -c src/fila_poder.cpp -o obj/fila_poder.o
+
+obj/fila_sinergia.o:
+	@mkdir -p obj
+	$(CC) -Iinclude -c src/fila_sinergia.cpp -o obj/fila_sinergia.o
 
 obj/matriz_modificadores.o: src/matriz_modificadores.cpp include/matriz_modificadores.h
 	@mkdir -p obj

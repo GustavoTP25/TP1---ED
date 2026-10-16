@@ -68,7 +68,7 @@ int main(){
         } else if (comando == "M"){ // adiciona um modificador a um item
             int idItem, idAtributo, valor;
             ss >> idItem >> idAtributo >> valor;
-            matrizModificadores.setValor(idItem, idAtributo, valor, atributos);
+            matrizModificadores.setValor(idItem, idAtributo, valor);
             std::cout << "M " << itens.pesquisa(idItem).getNome() << " " << atributos.pesquisa(idAtributo).getNome() << " " << valor << std::endl;
         
         } else if (comando == "LI"){ // listagem dos atributos associados a um item
@@ -81,10 +81,22 @@ int main(){
             ss >> idAtributo;
             matrizModificadores.consultaAtributo(atributos, itens, idAtributo);
 
-        } else if (comando == "LH"){
+        } else if (comando == "LH"){ // listagem da build
             int idAventureiro;
             ss >> idAventureiro;
             aventureiros.pesquisa(idAventureiro)->listarBuild(matrizModificadores, atributos);
+        } else if (comando == "Q"){
+            int idAventureiro, n, m;
+            ss >> idAventureiro >> n >> m;
+            std::string metricas[m];
+            double pesos[m];
+
+            for (int i = 0; i < m; i++){
+                ss >> metricas[i];
+                ss >> pesos[i];
+            }
+            matrizModificadores.consultaRecomendacao(idAventureiro, aventureiros, atributos, itens, metricas, pesos, m, n);
+
         }
     }
 }

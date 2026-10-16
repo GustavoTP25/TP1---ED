@@ -1,199 +1,7 @@
 #include "../include/matriz_modificadores.h"
 #include <iostream>
 #include <cmath>
-
-FilaPoder::FilaPoder(){
-    frente = new CelulaMetrica();
-    tamanho = 0;
-}
-
-FilaEquilibrio::FilaEquilibrio(){
-    frente = new CelulaMetrica();
-    tamanho = 0;
-}
-
-FilaSinergia::FilaSinergia(){
-    frente = new CelulaSinergia();
-    tamanho = 0;
-}
-
-FilaPoder::~FilaPoder(){
-    CelulaMetrica *p;
-    p = frente->proximo;
-    while (p != NULL) {
-        frente->proximo = p->proximo;
-        delete p;
-        p = frente->proximo;
-    }
-    delete frente;
-}
-
-FilaEquilibrio::~FilaEquilibrio(){
-    CelulaMetrica *p;
-    p = frente->proximo;
-    while (p != NULL) {
-        frente->proximo = p->proximo;
-        delete p;
-        p = frente->proximo;
-    }
-    delete frente;
-}
-
-FilaSinergia::~FilaSinergia(){
-    CelulaSinergia *p;
-    p = frente->proximo;
-    while (p != NULL) {
-        frente->proximo = p->proximo;
-        delete p;
-        p = frente->proximo;
-    }
-    delete frente;
-}
-
-void FilaPoder::setValor(int idItem, double valor) {
-    CelulaMetrica* ant = frente;
-    CelulaMetrica* p = frente->proximo;
-
-    // Procura o item na lista, ignorando o sentinela
-    while (p != NULL && p->idItem != idItem) {
-        ant = p;
-        p = p->proximo;
-    }
-
-    if (p != NULL) {
-        // O item já existe: remove da posição atual
-        ant->proximo = p->proximo;
-        p->proximo = NULL;
-    } else {
-        // O item não existe: cria uma nova célula
-        p = new CelulaMetrica();
-        p->idItem = idItem;
-        tamanho++;
-    }
-
-    p->valor = valor;
-
-    // Procura a posição correta: valor decrescente,
-    // e ID crescente em caso de empate
-    ant = frente;
-    CelulaMetrica* atual = frente->proximo;
-
-    while (atual != NULL &&
-           (atual->valor > valor ||
-            (atual->valor == valor && atual->idItem < idItem))) {
-        ant = atual;
-        atual = atual->proximo;
-    }
-
-    // Insere na posição correta
-    p->proximo = atual;
-    ant->proximo = p;
-}
-
-void FilaEquilibrio::setValor(int idItem, double valor){
-    CelulaMetrica* ant = frente;
-    CelulaMetrica* p = frente->proximo;
-
-    // Procura o item na lista, ignorando o sentinela
-    while (p != NULL && p->idItem != idItem) {
-        ant = p;
-        p = p->proximo;
-    }
-
-    if (p != NULL) {
-        // O item já existe: remove da posição atual
-        ant->proximo = p->proximo;
-        p->proximo = NULL;
-    } else {
-        // O item não existe: cria uma nova célula
-        p = new CelulaMetrica();
-        p->idItem = idItem;
-        tamanho++;
-    }
-
-    p->valor = valor;
-
-    // Procura a posição correta: valor decrescente,
-    // e ID crescente em caso de empate
-    ant = frente;
-    CelulaMetrica* atual = frente->proximo;
-
-    while (atual != NULL &&
-           (atual->valor > valor ||
-            (atual->valor == valor && atual->idItem < idItem))) {
-        ant = atual;
-        atual = atual->proximo;
-    }
-
-    // Insere na posição correta
-    p->proximo = atual;
-    ant->proximo = p;
-}
-
-void FilaSinergia::setValor(int idItem, int idAventureiro, double valor) {
-    CelulaSinergia* ant = frente;
-    CelulaSinergia* p = frente->proximo;
-
-    // Procura o item e o aventureiro na lista
-    while (p != NULL) {
-        if (p->idItem == idItem && p->idAventureiro == idAventureiro)
-            break;
-    
-        ant = p;
-        p = p->proximo;
-    }
-
-    // Se encontrou, remove a célula da posição atual
-    if (p != NULL) {
-        ant->proximo = p->proximo;
-    } else {
-        // Se não encontrou, cria uma nova célula
-        p = new CelulaSinergia();
-        p->idItem = idItem;
-        p->idAventureiro = idAventureiro;
-
-        tamanho++;
-    }
-
-    p->valor = valor;
-
-    // Procura a posição correta para inserir a célula
-    ant = frente;
-    CelulaSinergia* atual = frente->proximo;
-
-    while (atual != NULL) {
-        // Se o valor atual for maior, continua avançando
-        if (atual->valor > valor) {
-            ant = atual;
-            atual = atual->proximo;
-        }
-        // Se os valores forem iguais, compara os IDs
-        else if (atual->valor == valor) {
-            if (atual->idItem < idItem) {
-                ant = atual;
-                atual = atual->proximo;
-            }
-            else if (atual->idItem == idItem &&
-                     atual->idAventureiro < idAventureiro) {
-                ant = atual;
-                atual = atual->proximo;
-            }
-            else {
-                break;
-            }
-        }
-        // Se o valor atual for menor, encontrou a posição
-        else {
-            break;
-        }
-    }
-
-    // Insere a célula na posição encontrada
-    p->proximo = atual;
-    ant->proximo = p;
-}
-
-//////////////////////////////////////////////////////////////
+#include <iomanip>
 
 MatrizModificadores::MatrizModificadores(){
     this->modo = 'L'; // por padrão sempre ira inicializar no modo L
@@ -262,15 +70,15 @@ int MatrizModificadores::somaAtributos(BuildAventureiro &build, int idAtributo){
         if (idAtributo >= 0 && idAtributo < matrizModoL->numeroColunas){
             CelulaMatriz* p = matrizModoL->CabecasColuna[idAtributo]->proxColuna;
             while (p != NULL){
-                if (build.verificaItemEquipado(p->lin))
-                    soma += p->valor;
+                soma += p->valor * build.contarItens(p->lin);
                 p = p->proxColuna;
             }
         }
     } else {
-        for (int i = 0; i < this->matrizModoT->tamanho; i++){
-            if (build.verificaItemEquipado(this->matrizModoT->vetor[i].idItem) && matrizModoT->vetor[i].idAtributo == idAtributo)
-                soma += this->matrizModoT->vetor[i].valor;
+        MatrizModoT* t = this->matrizModoT;
+        for (int i = 0; i < t->tamanho; i++){
+            if (t->vetor[i].idAtributo == idAtributo)
+                soma += t->vetor[i].valor * build.contarItens(t->vetor[i].idItem);
         }
     }
     return soma;
@@ -324,41 +132,132 @@ double MatrizModificadores::calculaEquilibrioItem(FilaAtributos &atributos, int 
     return 1.0 / (1.0 + sigma);
 }
 
-double MatrizModificadores::calculaSinergia(BuildAventureiro &build, int idItem){
-    double somatorio1, somatorio2, somatorio3 = 0;
+void MatrizModificadores::calculaBuild(BuildAventureiro &build, int T, long long* b, long long &normB2){
+    normB2 = 0;
+    for (int a = 0; a < T; a++){
+        b[a] = this->somaAtributos(build, a);
+        normB2 += b[a] * b[a];
+    }
+}
+
+double MatrizModificadores::calculaSinergia(const long long* b, int T, long long normB2, int idItem){
+    if (normB2 == 0) return 0.0;                 // build vazia
+
+    long long dot = 0;                           // soma de v_i(a) * b(a)
+    long long n2 = 0;                            // soma de v_i(a)^2
+
     if (this->modo == 'L'){
         if (idItem >= 0 && idItem < matrizModoL->numeroLinhas){
             CelulaMatriz* p = matrizModoL->CabecasLinha[idItem]->proxLinha;
             while (p != NULL){
-                somatorio1 += p->valor * this->somaAtributos(build, p->col);
-                somatorio2 += p->valor * p->valor;
-                somatorio3 += this->somaAtributos(build, p->col) * this->somaAtributos(build, p->col);
+                if (p->col < T){
+                    dot += (long long)p->valor * b[p->col];
+                    n2  += (long long)p->valor * p->valor;
+                }
                 p = p->proxLinha;
             }
         }
     } else {
         MatrizModoT* t = this->matrizModoT;
-        for (int i = 0; i < this->matrizModoT->tamanho; i++){
-            if (this->matrizModoT->vetor[i].idItem == idItem){
-                somatorio1 += this->matrizModoT->vetor[i].valor * this->somaAtributos(build, this->matrizModoT->vetor[i].idAtributo);
-                somatorio2 += this->matrizModoT->vetor[i].valor * this->matrizModoT->vetor[i].valor;
-                somatorio3 += this->somaAtributos(build, this->matrizModoT->vetor[i].idAtributo) * this->somaAtributos(build, this->matrizModoT->vetor[i].idAtributo);
+        for (int i = 0; i < t->tamanho; i++){
+            if (t->vetor[i].idItem == idItem && t->vetor[i].idAtributo < T){
+                dot += (long long)t->vetor[i].valor * b[t->vetor[i].idAtributo];
+                n2  += (long long)t->vetor[i].valor * t->vetor[i].valor;
             }
         }
     }
-    if (somatorio2 == 0 || somatorio3 == 0) return 0.0;
-    return somatorio1 / (sqrt(somatorio2) * sqrt(somatorio3));
+
+    if (n2 == 0) return 0.0;                     // item sem modificador
+    return (double)dot / (std::sqrt((double)n2) * std::sqrt((double)normB2));
 }
 
-void MatrizModificadores::setValor(int idItem, int idAtributo, int valor, FilaAtributos &atributos){
+void MatrizModificadores::consultaRecomendacao(int idAventureiro, FilaAventureiros &aventureiros, FilaAtributos &atributos, FilaItens &itens, std::string metricas[], double pesos[], int m, int n){
+    int T = atributos.tamanho;
+    int N = itens.tamanho;
+
+    Aventureiro* aventureiro = aventureiros.pesquisa(idAventureiro);
+    BuildAventureiro *build = &aventureiro->build;
+
+
+    long long* b = new long long[T];
+    long long normB2;
+    calculaBuild(*build, T, b, normB2);
+
+    for (int i = 0; i < N; i++){
+        filaPoder.setValor(i, calculaPoderItem(i));
+        filaEquilibrio.setValor(i, calculaEquilibrioItem(atributos, i));
+        filaSinergia.setValor(i, calculaSinergia(b, T, normB2, i));
+    }
+
+    long long* pontos = new long long[N];
+    for (int i = 0; i < N; i++) pontos[i] = 0;
+    
+
+    for (int i = 0; i < m; i++){
+        long long pesoCent = std::llround(pesos[i] * 100.0);
+        if (metricas[i] == "SINERGIA")
+            filaSinergia.acumulaPontos(pontos, pesoCent, N);
+        else if (metricas[i] == "PODER")
+            filaPoder.acumulaPontos(pontos, pesoCent, N);
+        else if (metricas[i] == "EQUILIBRIO")
+            filaEquilibrio.acumulaPontos(pontos, pesoCent, N);
+    }
+
+    //////////////////////////////////////////////
+
+    long long* maximos = new long long[n]; // guarda os n maiores valores
+    int* maximos_id = new int[n]; // guarda os ids dos n maiores valores
+
+    bool* selecionado = new bool[N];; // armazena se um valor ja foi selecionado dentre os n maiores
+    int quantidade = 0;
+    for (int j = 0; j < N; j++)selecionado[j] = false;
+
+    for (int i = 0; i < n && i < N; i++) {
+        long long max = -1;
+        int max_j = -1;
+
+        for (int j = 0; j < N; j++) {
+            if (!build->verificaItemEquipado(j) && !selecionado[j]) {
+                if (max_j == -1 || pontos[j] > max) {
+                    max = pontos[j];
+                    max_j = j;
+                }
+            }
+        }
+
+        // Não existem mais itens candidatos.
+        if (max_j == -1) {
+            break;
+        }
+
+        maximos[i] = max;
+        maximos_id[i] = max_j;
+
+        selecionado[max_j] = true;
+        quantidade++;
+    }
+    
+    for (int i = 0; i < quantidade; i++)
+        std::cout << "Q " << i + 1 << " " << maximos_id[i] << " "
+        << std::fixed << std::setprecision(2) << maximos[i] / 100.0<< std::endl;
+
+    delete[] b;
+    delete[] maximos;
+    delete[] maximos_id;
+    delete[] selecionado;
+    delete[] pontos;
+
+    this->filaPoder.Limpa();
+    this->filaEquilibrio.Limpa();
+    this->filaSinergia.Limpa();
+}
+
+void MatrizModificadores::setValor(int idItem, int idAtributo, int valor){
     if (this->modo == 'L')
         this->matrizModoL->setValor(idItem, idAtributo, valor);
     else if (this->modo == 'T')
         this->matrizModoT->setValor(idItem, idAtributo, valor);
-
-    // sempre que um item é adicionado, a lista de métricas são atualizadas
-    filaPoder.setValor(idItem, calculaPoderItem(idItem));
-    filaEquilibrio.setValor(idItem, calculaEquilibrioItem(atributos, idItem));
+    
 }
 
 int MatrizModificadores::getValor(int idItem, int idAtributo){

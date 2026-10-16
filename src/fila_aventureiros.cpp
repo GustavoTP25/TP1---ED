@@ -49,7 +49,7 @@ bool FilaAventureiros::equiparItem(FilaItens &itens, int idAventureiro, int idIt
     Item item = itens.pesquisa(idItem);
     Aventureiro* aventureiro = this->pesquisa(idAventureiro);
     if (item.getId() != -1 && aventureiro != NULL){
-        aventureiro->build.equiparItem(item, matrizModificadores, idAventureiro, aventureiro->build);
+        aventureiro->build.equiparItem(item);
         return 1;
     }
     return 0;

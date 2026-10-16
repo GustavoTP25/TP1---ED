@@ -17,14 +17,12 @@ BuildAventureiro::BuildAventureiro(){
     this->tamanho = 0;
 }
 
-void BuildAventureiro::equiparItem(Item item, MatrizModificadores &matrizModificadores, int idAventureiro, BuildAventureiro &build){
+void BuildAventureiro::equiparItem(Item item){
     CelulaBuild *p = new CelulaBuild();
     p->item = item;
     p->proximo = topo;
     topo = p;
     tamanho++;
-
-    matrizModificadores.filaSinergia.setValor(item.getId(), idAventureiro, matrizModificadores.calculaSinergia(build, item.getId()));
 }
 
 Item BuildAventureiro::desequiparItem(){
@@ -54,6 +52,17 @@ bool BuildAventureiro::verificaItemEquipado(int idItem){
         p = p->proximo;
     }
     return 0;
+}
+
+int BuildAventureiro::contarItens(int idItem){
+    CelulaBuild* p = this->topo;
+    int soma = 0;
+    while (p != NULL){
+        if (p->item.getId() == idItem)
+            soma++;
+        p = p->proximo;
+    }
+    return soma;
 }
 
 void BuildAventureiro::listarBuild(std::string nomeAventureiro, BuildAventureiro &build, MatrizModificadores &matrizModificadores, FilaAtributos &atributos){

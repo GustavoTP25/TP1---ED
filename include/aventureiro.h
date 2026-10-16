@@ -20,6 +20,7 @@ class Aventureiro {
         void setId(int id);
         void setNome(std::string nome);
     friend class FilaAventureiros;
+    friend class MatrizModificadores;
 
 };
 
